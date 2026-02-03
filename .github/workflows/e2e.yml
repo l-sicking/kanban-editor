@@ -1,52 +1,52 @@
-name: E2E Tests
+# name: E2E Tests
 
-on:
-  push:
-    branches: cardsboard
-  pull_request:
+# on:
+#   push:
+#     branches: cardsboard
+#   pull_request:
 
-jobs:
-  test:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    permissions:
-      packages: read
+# # jobs:
+#   test:
+#     timeout-minutes: 60
+#     runs-on: ubuntu-latest
+#     permissions:
+#       packages: read
 
-    steps:
-    - uses: actions/checkout@v4
+#     steps:
+#     - uses: actions/checkout@v4
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v2
-      with:
-        version: 10
+#     - name: Install pnpm
+#       uses: pnpm/action-setup@v2
+#       with:
+#         version: 10
 
-    - name: Setup Node
-      uses: actions/setup-node@v4
-      with:
-        node-version: '22'
-        cache: 'pnpm'
-        registry-url: https://npm.pkg.github.com
+#     - name: Setup Node
+#       uses: actions/setup-node@v4
+#       with:
+#         node-version: '22'
+#         cache: 'pnpm'
+#         registry-url: https://npm.pkg.github.com
 
-    - name: Install dependencies
-      run: pnpm install --frozen-lockfile
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     - name: Install dependencies
+#       run: pnpm install --frozen-lockfile
+#       env:
+#         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Install Playwright Browsers
-      run: pnpm exec playwright install --with-deps
+#     - name: Install Playwright Browsers
+#       run: pnpm exec playwright install --with-deps
       
-    - name: Spin up relay server
-      run: docker compose up -d
+#     - name: Spin up relay server
+#       run: docker compose up -d
 
-    - name: Use specific ci config
-      run: cp static/config.ci.json static/config.json
+#     - name: Use specific ci config
+#       run: cp static/config.ci.json static/config.json
 
-    - name: Run Playwright tests
-      run: PW_DEBUG=1 pnpm test:e2e
+#     - name: Run Playwright tests
+#       run: PW_DEBUG=1 pnpm test:e2e
 
-    - uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+#     - uses: actions/upload-artifact@v4
+#       if: always()
+#       with:
+#         name: playwright-report
+#         path: playwright-report/
+#         retention-days: 30

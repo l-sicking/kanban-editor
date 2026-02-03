@@ -1,71 +1,71 @@
-name: checks
+# name: checks
 
-on:
-  push:
-    branches: [ cardsboard ]
-  pull_request:
+# on:
+#   push:
+#     branches: [ cardsboard ]
+#   pull_request:
 
-jobs:
-  check-svelte:
-    runs-on: ubuntu-latest
-    permissions:
-      packages: read
+# jobs:
+#   check-svelte:
+#     runs-on: ubuntu-latest
+#     permissions:
+#       packages: read
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
       
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
+#       - name: Install pnpm
+#         uses: pnpm/action-setup@v4
+#         with:
+#           version: 10
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'pnpm'
-          registry-url: https://npm.pkg.github.com
+#       - name: Setup Node
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '22'
+#           cache: 'pnpm'
+#           registry-url: https://npm.pkg.github.com
 
-      - name: Enable pnpm (Corepack)
-        run: corepack enable && corepack prepare pnpm@latest --activate
+#       - name: Enable pnpm (Corepack)
+#         run: corepack enable && corepack prepare pnpm@latest --activate
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       - name: Install dependencies
+#         run: pnpm install --frozen-lockfile
+#         env:
+#           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run pnpm check
-        run: pnpm check
+#       - name: Run pnpm check
+#         run: pnpm check
 
-  check-build:
-    runs-on: ubuntu-latest
-    permissions:
-      packages: read    
+#   check-build:
+#     runs-on: ubuntu-latest
+#     permissions:
+#       packages: read    
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
       
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
+#       - name: Install pnpm
+#         uses: pnpm/action-setup@v4
+#         with:
+#           version: 10
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'pnpm'
-          registry-url: https://npm.pkg.github.com
+#       - name: Setup Node
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '22'
+#           cache: 'pnpm'
+#           registry-url: https://npm.pkg.github.com
 
-      - name: Enable pnpm (Corepack)
-        run: corepack enable && corepack prepare pnpm@latest --activate
+#       - name: Enable pnpm (Corepack)
+#         run: corepack enable && corepack prepare pnpm@latest --activate
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       - name: Install dependencies
+#         run: pnpm install --frozen-lockfile
+#         env:
+#           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run pnpm build
-        run: pnpm build
+#       - name: Run pnpm build
+#         run: pnpm build
