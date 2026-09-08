@@ -105,7 +105,7 @@
     "@edufeed-org/oer-finder-plugin": "^0.0.8",
     "@nostr-dev-kit/ndk": "2.14.2",
     "@nostr-dev-kit/svelte": "^2.0.8",
-    "@tiptap/core": "^3.13.0",
+    "@tiptap/core": "^3.30.5",
     "@tiptap/extension-image": "^3.13.0",
     "@tiptap/extension-link": "^3.13.0",
     "@tiptap/extension-placeholder": "^3.13.0",
